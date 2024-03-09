@@ -127,7 +127,7 @@ class ResizableHandles extends React.PureComponent {
         </div>
 
         <div key="1" className="div_2">
-         <h1>msdskd</h1>
+         <h1>Ajay</h1>
         </div>
         
         <div key="2" className="div-3">
