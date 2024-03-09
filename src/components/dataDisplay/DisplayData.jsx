@@ -28,10 +28,16 @@ function DisplayData({ shouldUpdate }) {
 
     const handleSave = async (index) => {
         try {
+            const startTime = performance.now(); // Start measuring execution time
+    
             // Make the API call to update the data
             await axios.put(`https://backend-nodejs-assigment2.onrender.com/edit-data/${data[index]._id}`, {
                 string: editedString
             });
+    
+            // Calculate execution time
+            const endTime = performance.now();
+            const executionTime = (endTime - startTime).toFixed(2);
     
             // Update the data in the local state
             const updatedData = [...data];
@@ -44,15 +50,18 @@ function DisplayData({ shouldUpdate }) {
             // Clear edited string
             setEditedString('');
     
-            // Fetch updated data after saving
-            fetchData();
-    
-            // Display success message
+            // Display success message with execution time
             Swal.fire({
                 icon: 'success',
                 title: 'Data Updated',
-                text: 'The data has been successfully updated.',
+                text: `The data has been successfully updated. Execution time: ${executionTime} ms`,
             });
+    
+            // Wait for 1 second before fetching updated data
+            setTimeout(() => {
+                // Fetch updated data after saving
+                fetchData();
+            }, 1000);
         } catch (error) {
             console.error('Error updating data:', error);
             // Display error message
@@ -63,9 +72,13 @@ function DisplayData({ shouldUpdate }) {
             });
         }
     };
+    
+    
+
     return (
         <div>
             <h2>Display Data</h2>
+
             <table>
                 <thead>
                     <tr>
