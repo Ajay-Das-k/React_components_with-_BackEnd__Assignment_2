@@ -3,9 +3,10 @@ import Swal from "sweetalert2";
 import "./Form.css";
 import axios from 'axios';
 
-function PostForm({ onDataAdded }) { // Accepting the onDataAdded prop
+function PostForm(props) { // Accepting the onDataAdded prop
+    const { onDataUpdate }=props
     const [stringInput, setStringInput] = useState('');
-    const [response, setResponse] = useState('');
+    // const [response, setResponse] = useState('');
     const [executionTime, setExecutionTime] = useState(0);
 
     const handleSubmit = async (event) => {
@@ -19,12 +20,15 @@ function PostForm({ onDataAdded }) { // Accepting the onDataAdded prop
                 string: stringInput
             });
 
-            setResponse(JSON.stringify(response.data));
+            // setResponse(JSON.stringify(response.data));
 
             const endTime = performance.now(); // Record end time
             const timeTaken = (endTime - startTime).toFixed(2); // Calculate execution time
 
             setExecutionTime(timeTaken);
+            
+            
+            onDataUpdate()
 
             // Display success message in sweet alert
             Swal.fire({
@@ -34,7 +38,7 @@ function PostForm({ onDataAdded }) { // Accepting the onDataAdded prop
             });
 
             // Call the onDataAdded callback to notify the parent component
-            onDataAdded();
+            // onDataAdded();
 
         } catch (error) {
             console.error('Error:', error);
