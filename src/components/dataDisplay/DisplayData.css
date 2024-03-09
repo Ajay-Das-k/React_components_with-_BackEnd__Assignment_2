@@ -31,12 +31,12 @@
     padding: 8px;
     border: 1px solid #ffffff;
     text-align: left;
-    color: rgb(0, 0, 15);
+    color: rgb(255, 255, 255);
 }
 /* Base button styles */
 
 button {
-    background-color: rgba(0, 0, 255, 0.342);
+    background-color: rgba(5, 255, 213, 0.342);
     display: inline-block;
     padding: 2% 2%; /* Adjust padding based on parent div's size */
     border: none;
@@ -68,7 +68,7 @@ button:hover {
     background-color: transparent;
 }
 .reset_button {
-    background-color: rgba(0, 0, 0, 0.623);
+    background-color: rgba(212, 32, 32, 0.623);
     padding: 1rem;
    
     max-width: 100%; /* Ensures the button does not exceed the container width */

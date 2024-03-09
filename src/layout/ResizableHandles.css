@@ -146,8 +146,8 @@ body {
   bottom: 3px;
   width: 5px;
   height: 5px;
-  border-right: 2px solid rgba(0, 0, 0, 0.4);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  border-right: 2px solid rgba(243, 243, 243, 0.562);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.658);
 }
 
 .react-resizable-hide > .react-resizable-handle {
@@ -209,15 +209,15 @@ body {
 
 /* Gradient for div 1 */
 .div_1 {
-  background: linear-gradient(to right, #8800f7, #e6fe7b);
+  background: linear-gradient(to right, #000000, #00000044);
 }
 
 /* Gradient for div 2 */
 .div_2 {
-  background: linear-gradient(to right, #f7aa03, #a5fe0077);
+  background: linear-gradient(to right, #000000, #00000077);
 }
 
 /* Gradient for div 3 */
 .div-3 {
-  background: linear-gradient(to right, #ff1e00, #030303);
+  background: linear-gradient(to right, #000000, #03030377);
 }
