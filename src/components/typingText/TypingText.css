@@ -1,0 +1,21 @@
+.typingTextContainer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ensure text doesn't overflow the container */
+}
+
+.typingTextContainer p {
+  margin: 0; /* Remove any default margins */
+  padding: 10px; /* Add padding to create space for the cursor effect */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Ensure text doesn't overflow */
+  border-right: 1px solid rgba(241, 241, 241, 0); /* Add a cursor effect */
+  white-space: normal; /* Allow text to wrap */
+  overflow-wrap: break-word; /* Wrap long words to the next line */
+  animation: typingAnimation 5s steps(40) infinite; /* Adjust the animation duration and steps as needed */
+}
+
+@keyframes typingAnimation {
+  from { width: 0; }
+  to { width: 100%; }
+}

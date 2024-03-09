@@ -3,6 +3,7 @@ import RGL, { WidthProvider } from "react-grid-layout";
 import "./ResizableHandles.css";
 import PostForm from "../components/form/Form";
 import DisplayData from "../components/dataDisplay/DisplayData";
+import TypingEffect from "../components/typingText/TypingText"
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -127,9 +128,11 @@ class ResizableHandles extends React.PureComponent {
         <h3>
             Hai I am Ajay Das 
         </h3>
-          <text>
-            Welcome to Responsive Grid Layout With Backend using React And Node Js
-          </text>
+        <TypingEffect text="Welcome to Responsive Grid Layout With Backend using React And Node Js" delay={100} />
+        
+        
+        <a href="" target="blank"><TypingEffect text="Link To Back End Code" delay={100} /></a>
+        <a href="" target="blank"><TypingEffect text="Link To FrontEnd Code" delay={100} /></a>
 
 
         </div>
