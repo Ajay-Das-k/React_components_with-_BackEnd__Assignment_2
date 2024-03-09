@@ -1,38 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function DisplayData() {
+function DisplayData({ shouldUpdate }) {
     const [data, setData] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
-    const [editValue, setEditValue] = useState('');
+    const [editedString, setEditedString] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://backend-nodejs-assigment2.onrender.com/allData');
-                setData(response.data);
+                setData(response.data.data);
             } catch (error) {
                 console.error('Error:', error);
             }
         };
 
         fetchData();
-    }, []);
+    }, [shouldUpdate]);
 
     const handleEdit = (index) => {
         setEditingIndex(index);
-        setEditValue(data[index].string);
+        setEditedString(data[index].string);
     };
 
     const handleSave = async (index) => {
         try {
-            await axios.put(`https://backend-nodejs-assigment2.onrender.com/data/${data[index]._id}`, { string: editValue });
-            const newData = [...data];
-            newData[index].string = editValue;
-            setData(newData);
+            await axios.put(`http://localhost:5000/updateData/${data[index]._id}`, {
+                string: editedString
+            });
             setEditingIndex(null);
+            // Fetch updated data after saving
+            fetchData();
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error updating data:', error);
         }
     };
 
@@ -53,8 +54,8 @@ function DisplayData() {
                                 {editingIndex === index ? (
                                     <input
                                         type="text"
-                                        value={editValue}
-                                        onChange={(e) => setEditValue(e.target.value)}
+                                        value={editedString}
+                                        onChange={(e) => setEditedString(e.target.value)}
                                     />
                                 ) : (
                                     item.string

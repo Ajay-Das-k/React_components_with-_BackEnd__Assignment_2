@@ -1,13 +1,19 @@
 import React from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
 import "./ResizableHandles.css";
-import PostForm from "../components/form/Form"; // Assuming PostForm is in the same directory as this file
-import Div_2 from "../components/div_2/Div_2";
-import Div_3 from "../components/div_3/Div_3";
+import PostForm from "../components/form/Form";
+import DisplayData from "../components/dataDisplay/DisplayData";
 
 const ReactGridLayout = WidthProvider(RGL);
 
-export default class ResizableHandles extends React.PureComponent {
+class ResizableHandles extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataUpdated: false, // Add state to track if data is updated
+    };
+  }
+
   static defaultProps = {
     className: "layout",
     items: 3,
@@ -15,8 +21,6 @@ export default class ResizableHandles extends React.PureComponent {
     onLayoutChange: () => {},
     cols: 4,
   };
-
-  // No need to include constructor, componentDidMount, and componentWillUnmount
 
   // Generate initial layout for the grid
   generateLayout() {
@@ -102,6 +106,11 @@ export default class ResizableHandles extends React.PureComponent {
     this.onLayoutChange(updatedLayout);
   };
 
+  // Callback function to be passed to PostForm to update data
+  handleDataUpdate = () => {
+    this.setState({ dataUpdated: true });
+  };
+
   render() {
     const { className, rowHeight } = this.props;
     return (
@@ -113,19 +122,20 @@ export default class ResizableHandles extends React.PureComponent {
         rowHeight={rowHeight}
         onResizeStop={this.onResizeStop}
       >
-
         <div key="0" className="div_1">
-          <PostForm />
+          <PostForm onDataUpdate={this.handleDataUpdate} />
         </div>
 
         <div key="1" className="div_2">
-          <Div_2 />
+          <DisplayData key="displayData1" shouldUpdate={this.state.dataUpdated} />
         </div>
         
         <div key="2" className="div-3">
-          <Div_3 />
+          <DisplayData key="displayData2" shouldUpdate={this.state.dataUpdated} />
         </div>
       </ReactGridLayout>
     );
   }
 }
+
+export default ResizableHandles;
