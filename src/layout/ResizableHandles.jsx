@@ -3,7 +3,7 @@ import RGL, { WidthProvider } from "react-grid-layout";
 import "./ResizableHandles.css";
 import PostForm from "../components/form/Form";
 import DisplayData from "../components/dataDisplay/DisplayData";
-import TypingEffect from "../components/typingText/TypingText"
+import TypingEffect from "../components/typingText/TypingText";
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -109,13 +109,10 @@ class ResizableHandles extends React.PureComponent {
 
   // Callback function to be passed to PostForm to update data
   handleDataUpdate = () => {
-    this.setState({ dataUpdated: [!this.state.dataUpdated] });
+    this.setState({ dataUpdated: !this.state.dataUpdated });
   };
 
-
-
   render() {
-  
     const { className, rowHeight } = this.props;
     return (
       <ReactGridLayout
@@ -127,25 +124,18 @@ class ResizableHandles extends React.PureComponent {
         onResizeStop={this.onResizeStop}
       >
         <div key="0" className="div_1">
-        <div className="textContainer">
-        <h3>
-            Hai I am Ajay Das 
-        </h3>
-        <TypingEffect text="Welcome to Responsive Grid Layout With Backend using React And Node Js" delay={100} />
-        
-        
-        <a href="https://github.com/Ajay-Das-k/Node_jS_BackEnd_For_Todo_list_Assignment2" target="blank"><TypingEffect text="Link To Back End Code" delay={100} /></a>
-        <a href="https://github.com/Ajay-Das-k/React_components_with-_BackEnd__Assignment_2" target="blank"><TypingEffect text="Link To FrontEnd Code" delay={100} /></a>
-
-
-        </div>
-          
-
-          
+          <div className="textContainer">
+            <h3>
+              Hai I am Ajay Das 
+            </h3>
+            <TypingEffect text="Welcome to Responsive Grid Layout With Backend using React And Node Js" delay={100} />
+            <a href="https://github.com/Ajay-Das-k/Node_jS_BackEnd_For_Todo_list_Assignment2" target="blank"><TypingEffect text="Link To Back End Code" delay={100} /></a>
+            <a href="https://github.com/Ajay-Das-k/React_components_with-_BackEnd__Assignment_2" target="blank"><TypingEffect text="Link To FrontEnd Code" delay={100} /></a>
+          </div>
         </div>
 
         <div key="1" className="div_2">
-        <PostForm onDataUpdate={this.handleDataUpdate} />
+          <PostForm onDataUpdate={this.handleDataUpdate} />
         </div>
         
         <div key="2" className="div-3">

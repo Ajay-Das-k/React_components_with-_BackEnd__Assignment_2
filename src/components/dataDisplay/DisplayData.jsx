@@ -4,29 +4,33 @@ import Swal from "sweetalert2";
 import axios from 'axios';
 
 function DisplayData({ shouldUpdate }) {
-    const [data, setData] = useState([]);
-    const [editingIndex, setEditingIndex] = useState(null);
-    const [editedString, setEditedString] = useState('');
+    // State variables
+    const [data, setData] = useState([]); // Store fetched data
+    const [editingIndex, setEditingIndex] = useState(null); // Track index being edited
+    const [editedString, setEditedString] = useState(''); // Store edited string
     const [resetTrigger, setResetTrigger] = useState(false); // State variable to trigger re-render
 
     useEffect(() => {
+        // Function to fetch data from the server
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://backend-nodejs-assigment2.onrender.com/allData');
-                setData(response.data.data);
+                setData(response.data.data); // Update state with fetched data
             } catch (error) {
                 console.error('Error:', error);
             }
         };
 
-        fetchData();
+        fetchData(); // Call fetchData when the component mounts or shouldUpdate changes
     }, [shouldUpdate, resetTrigger]); // Include resetTrigger in the dependency array
 
+    // Handle editing of a string
     const handleEdit = (index) => {
-        setEditingIndex(index);
-        setEditedString(data[index].string);
+        setEditingIndex(index); // Set the index being edited
+        setEditedString(data[index].string); // Set the edited string to the current value
     };
 
+    // Handle saving the edited string
     const handleSave = async (index) => {
         try {
             const startTime = performance.now(); // Start measuring execution time
@@ -61,8 +65,7 @@ function DisplayData({ shouldUpdate }) {
 
             // Wait for 1 second before fetching updated data
             setTimeout(() => {
-                // Fetch updated data after saving
-                fetchData();
+                fetchData(); // Fetch updated data after saving
             }, 1000);
         } catch (error) {
             console.error('Error updating data:', error);
@@ -75,6 +78,7 @@ function DisplayData({ shouldUpdate }) {
         }
     };
 
+    // Handle deleting a string
     const handleDelete = async (index) => {
         try {
             const startTime = new Date(); // Start measuring execution time
@@ -108,6 +112,7 @@ function DisplayData({ shouldUpdate }) {
         }
     };
 
+    // Handle resetting all data
     const handleResetData = async () => {
         try {
             const startTime = performance.now(); // Start measuring execution time
@@ -126,7 +131,7 @@ function DisplayData({ shouldUpdate }) {
                 footer: `Execution time: ${executionTime} milliseconds`
             });
 
-            // Fetch updated data after resetting
+            fetchData(); // Fetch updated data after resetting
 
         } catch (error) {
             console.error('Error resetting data:', error);

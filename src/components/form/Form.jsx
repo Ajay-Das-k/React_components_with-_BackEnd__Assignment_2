@@ -1,69 +1,69 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import "./Form.css";
 import axios from 'axios';
+import "./Form.css";
 
-function PostForm(props) { // Accepting the onDataAdded prop
-    const { onDataUpdate }=props
+function PostForm(props) {
+    // Destructuring props
+    const { onDataUpdate } = props;
+
+    // State variables
     const [stringInput, setStringInput] = useState('');
-    // const [response, setResponse] = useState('');
     const [executionTime, setExecutionTime] = useState(0);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        event.stopPropagation(); // Stop event propagation here
+   // Handle form submission
+const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+    event.stopPropagation(); // Stop event propagation here to prevent bubbling
+    const startTime = performance.now(); // Record start time
 
-        const startTime = performance.now(); // Record start time
+    try {
+        // Make POST request to add data
+        const response = await axios.post('https://backend-nodejs-assigment2.onrender.com/addData', {
+            string: stringInput
+        });
 
-        try {
-            const response = await axios.post('https://backend-nodejs-assigment2.onrender.com/addData', {
-                string: stringInput
-            });
+        const endTime = performance.now(); // Record end time
+        const timeTaken = (endTime - startTime).toFixed(2); // Calculate execution time
 
-            // setResponse(JSON.stringify(response.data));
+        // Update state with execution time
+        setExecutionTime(timeTaken);
 
-            const endTime = performance.now(); // Record end time
-            const timeTaken = (endTime - startTime).toFixed(2); // Calculate execution time
+        // Clear the input field after successful submission
+        setStringInput('');
 
-            setExecutionTime(timeTaken);
-            
-            
-            onDataUpdate()
+        // Call the onDataUpdate callback to notify the parent component
+        onDataUpdate();
 
-            // Display success message in sweet alert
-            Swal.fire({
-                icon: 'success',
-                title: 'String added successfully!',
-                text: `Execution time: ${timeTaken} ms`,
-            });
+        // Display success message using SweetAlert
+        Swal.fire({
+            icon: 'success',
+            title: 'String added successfully!',
+            text: `Execution time: ${timeTaken} ms`,
+        });
 
-            // Call the onDataAdded callback to notify the parent component
-            // onDataAdded();
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
 
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
 
     return (
         <div className="form_div">
-            <h2>Create Post !</h2>
+            <h2>Create Post!</h2>
             <form onSubmit={handleSubmit}>
-                
-                
                 <div className="inputContainer">
-                <input
-                    className="inputText"
-                    type="text"
-                    value={stringInput}
-                    onChange={(e) => setStringInput(e.target.value)}
-                    required
-                />
-                <button type="submit">Submit</button>
+                    {/* Input field for entering string */}
+                    <input
+                        className="inputText"
+                        type="text"
+                        value={stringInput}
+                        onChange={(e) => setStringInput(e.target.value)}
+                        required
+                    />
+                    {/* Submit button */}
+                    <button type="submit">Submit</button>
                 </div>
-                
-                
-                
             </form>
         </div>
     );
