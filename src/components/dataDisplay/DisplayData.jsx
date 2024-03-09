@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Swal from "sweetalert2";
 import axios from 'axios';
+
 
 function DisplayData({ shouldUpdate }) {
     const [data, setData] = useState([]);
@@ -26,17 +28,41 @@ function DisplayData({ shouldUpdate }) {
 
     const handleSave = async (index) => {
         try {
-            await axios.put(`http://localhost:5000/updateData/${data[index]._id}`, {
+            // Make the API call to update the data
+            await axios.put(`https://backend-nodejs-assigment2.onrender.com/edit-data/${data[index]._id}`, {
                 string: editedString
             });
+    
+            // Update the data in the local state
+            const updatedData = [...data];
+            updatedData[index].string = editedString;
+            setData(updatedData);
+    
+            // Reset editing state
             setEditingIndex(null);
+    
+            // Clear edited string
+            setEditedString('');
+    
             // Fetch updated data after saving
             fetchData();
+    
+            // Display success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Data Updated',
+                text: 'The data has been successfully updated.',
+            });
         } catch (error) {
             console.error('Error updating data:', error);
+            // Display error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to update data.',
+            });
         }
     };
-
     return (
         <div>
             <h2>Display Data</h2>
