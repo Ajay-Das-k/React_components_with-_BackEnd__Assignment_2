@@ -16,7 +16,7 @@ Overall, react-grid-layout simplifies the process of creating flexible and inter
 
 
 
-![Netflix Clone](Layouts.png)
+![Netflix Clone](https://media1.giphy.com/media/iFmw13LV1hHhViPPWz/giphy.gif?cid=6c09b952gutjil7v831mjhnze4sjnwrzhej88oe1bsumbiqs&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s)
 
 ## Getting Started
 
