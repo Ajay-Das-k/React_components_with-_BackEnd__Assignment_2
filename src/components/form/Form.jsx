@@ -43,16 +43,23 @@ function PostForm({ onDataAdded }) { // Accepting the onDataAdded prop
 
     return (
         <div className="form_div">
-            <h2>Create Post</h2>
+            <h2>Create Post !</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="string">String:</label>
+                
+                
+                <div className="inputContainer">
                 <input
+                    className="inputText"
                     type="text"
                     value={stringInput}
                     onChange={(e) => setStringInput(e.target.value)}
                     required
                 />
                 <button type="submit">Submit</button>
+                </div>
+                
+                
+                
             </form>
         </div>
     );

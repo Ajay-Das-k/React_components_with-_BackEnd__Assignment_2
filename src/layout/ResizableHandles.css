@@ -4,6 +4,25 @@ body {
 #content {
   width: 100%;
 }
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content horizontally */
+  justify-content: center; /* Centers content vertically */
+  width: 100%; /* Make the container fill its parent */
+  height: 100%; /* Make the container fill its parent */
+}
+
+.textContainer h2 {
+  font-size: 1.5rem; /* Responsive font size for h2 */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center align the text */
+}
+
+
+
+
 .react-grid-layout {
   background: #242424;
   margin-top: 10px;
@@ -190,15 +209,15 @@ body {
 
 /* Gradient for div 1 */
 .div_1 {
-  background: linear-gradient(to right, #5fffca, #e6fe7b);
+  background: linear-gradient(to right, #8800f7, #e6fe7b);
 }
 
 /* Gradient for div 2 */
 .div_2 {
-  background: linear-gradient(to right, #ecfe4f, #00f2fe);
+  background: linear-gradient(to right, #f7aa03, #a5fe0077);
 }
 
 /* Gradient for div 3 */
 .div-3 {
-  background: linear-gradient(to right, #00ccff, #92fe9d);
+  background: linear-gradient(to right, #ff1e00, #030303);
 }

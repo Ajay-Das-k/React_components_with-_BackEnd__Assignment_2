@@ -1,0 +1,85 @@
+.tableContainer {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+}
+
+/* Track */
+.tableContainer::-webkit-scrollbar-track {
+    background: #ff1313; /* Light grey */
+}
+
+/* Handle */
+.tableContainer::-webkit-scrollbar-thumb {
+    background: #00ff6a; /* Grey */
+}
+
+/* Handle on hover */
+.tableContainer::-webkit-scrollbar-thumb:hover {
+    background: #ff0b0b; /* Dark grey */
+}
+
+
+.tableContainer table {
+    width: 100%;
+    border-collapse: collapse;
+    height: 100%;
+}
+
+.tableContainer th,
+.tableContainer td {
+    padding: 8px;
+    border: 1px solid #ffffff;
+    text-align: left;
+    color: rgb(0, 0, 15);
+}
+/* Base button styles */
+
+button {
+    background-color: rgba(0, 0, 255, 0.342);
+    display: inline-block;
+    padding: 2% 2%; /* Adjust padding based on parent div's size */
+    border: none;
+    border-radius: 5px;
+    font-size: 1vw; /* Adjust font size based on viewport width */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 1rem;
+}
+
+/* Button color on hover */
+button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.inputContainer {
+    width: 100%;
+    max-width: 300px; /* Adjust the max-width as needed */
+    margin-bottom: 10px;
+}
+
+.inputContainer input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    font-size: 16px;
+    background-color: transparent;
+}
+.reset_button {
+    background-color: rgba(0, 0, 0, 0.623);
+    padding: 1rem;
+   
+    max-width: 100%; /* Ensures the button does not exceed the container width */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    font-size: 16px; /* Adjust font size as needed */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset_button:hover {
+    background-color: rgb(250, 7, 7); /* Darker red color on hover */
+}

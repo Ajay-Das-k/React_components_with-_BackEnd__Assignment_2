@@ -123,11 +123,23 @@ class ResizableHandles extends React.PureComponent {
         onResizeStop={this.onResizeStop}
       >
         <div key="0" className="div_1">
-          <PostForm onDataUpdate={this.handleDataUpdate} />
+        <div className="textContainer">
+        <h3>
+            Hai I am Ajay Das 
+        </h3>
+          <text>
+            Welcome to Responsive Grid Layout With Backend using React And Node Js
+          </text>
+
+
+        </div>
+          
+
+          
         </div>
 
         <div key="1" className="div_2">
-         <h1>Ajay</h1>
+        <PostForm onDataUpdate={this.handleDataUpdate} />
         </div>
         
         <div key="2" className="div-3">

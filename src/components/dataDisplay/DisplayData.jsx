@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./DisplayData.css"
 import Swal from "sweetalert2";
 import axios from 'axios';
 
@@ -139,10 +140,10 @@ function DisplayData({ shouldUpdate }) {
     };
 
     return (
-        <div>
+        <div className='tableContainer'>
             <h2>Data</h2>
             {data.length > 0 && (
-                <button onClick={handleResetData}>Reset Data</button>
+                <button className='reset_button' onClick={handleResetData}>Reset Data</button>
             )}
 
             <table className='Datatable'>
@@ -157,11 +158,12 @@ function DisplayData({ shouldUpdate }) {
                         <tr key={index}>
                             <td>
                                 {editingIndex === index ? (
-                                    <input
-                                        type="text"
-                                        value={editedString}
-                                        onChange={(e) => setEditedString(e.target.value)}
-                                    />
+                                   <div className='inputContainer' >
+                                <input
+                                   type="text"
+                                   value={editedString}
+                                   onChange={(e) => setEditedString(e.target.value)}
+                               /></div> 
                                 ) : (
                                     item.string
                                 )}
