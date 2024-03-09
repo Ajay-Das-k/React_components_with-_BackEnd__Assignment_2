@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2";
 import axios from 'axios';
 
-
 function DisplayData({ shouldUpdate }) {
     const [data, setData] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
     const [editedString, setEditedString] = useState('');
+    const [resetTrigger, setResetTrigger] = useState(false); // State variable to trigger re-render
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +19,7 @@ function DisplayData({ shouldUpdate }) {
         };
 
         fetchData();
-    }, [shouldUpdate]);
+    }, [shouldUpdate, resetTrigger]); // Include resetTrigger in the dependency array
 
     const handleEdit = (index) => {
         setEditingIndex(index);
@@ -29,34 +29,35 @@ function DisplayData({ shouldUpdate }) {
     const handleSave = async (index) => {
         try {
             const startTime = performance.now(); // Start measuring execution time
-    
+
             // Make the API call to update the data
             await axios.put(`https://backend-nodejs-assigment2.onrender.com/edit-data/${data[index]._id}`, {
                 string: editedString
             });
-    
+
             // Calculate execution time
             const endTime = performance.now();
             const executionTime = (endTime - startTime).toFixed(2);
-    
+
             // Update the data in the local state
             const updatedData = [...data];
             updatedData[index].string = editedString;
             setData(updatedData);
-    
+
             // Reset editing state
             setEditingIndex(null);
-    
+
             // Clear edited string
             setEditedString('');
-    
+
             // Display success message with execution time
             Swal.fire({
                 icon: 'success',
                 title: 'Data Updated',
-                text: `The data has been successfully updated. Execution time: ${executionTime} ms`,
+                text: 'The data has been successfully updated.',
+                footer: `Execution time: ${executionTime} milliseconds`,
             });
-    
+
             // Wait for 1 second before fetching updated data
             setTimeout(() => {
                 // Fetch updated data after saving
@@ -72,14 +73,79 @@ function DisplayData({ shouldUpdate }) {
             });
         }
     };
-    
-    
+
+    const handleDelete = async (index) => {
+        try {
+            const startTime = new Date(); // Start measuring execution time
+
+            // Make the API call to delete the data
+            await axios.delete(`https://backend-nodejs-assigment2.onrender.com/deleteData/${data[index]._id}`);
+
+            // Remove the deleted data from the local state
+            const updatedData = [...data];
+            updatedData.splice(index, 1);
+            setData(updatedData);
+
+            const endTime = new Date(); // End measuring execution time
+            const executionTime = endTime - startTime; // Calculate execution time
+
+            // Display success message with execution time
+            Swal.fire({
+                icon: 'success',
+                title: 'Data Deleted',
+                text: 'The data has been successfully deleted.',
+                footer: `Execution time: ${executionTime} milliseconds`,
+            });
+        } catch (error) {
+            console.error('Error deleting data:', error);
+            // Display error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to delete data.',
+            });
+        }
+    };
+
+    const handleResetData = async () => {
+        try {
+            const startTime = performance.now(); // Start measuring execution time
+
+            // Make the API call to reset data
+            await axios.get('https://backend-nodejs-assigment2.onrender.com/resetData');
+            setResetTrigger(prevState => !prevState); // Toggle resetTrigger to force re-render
+            const endTime = performance.now(); // Stop measuring execution time
+            const executionTime = (endTime - startTime).toFixed(2); // Calculate execution time
+
+            // Display success message with execution time in footer
+            Swal.fire({
+                icon: 'success',
+                title: 'Data Reset',
+                text: 'All data has been successfully reset.',
+                footer: `Execution time: ${executionTime} milliseconds`
+            });
+
+            // Fetch updated data after resetting
+
+        } catch (error) {
+            console.error('Error resetting data:', error);
+            // Display error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to reset data.',
+            });
+        }
+    };
 
     return (
         <div>
-            <h2>Display Data</h2>
+            <h2>Data</h2>
+            {data.length > 0 && (
+                <button onClick={handleResetData}>Reset Data</button>
+            )}
 
-            <table>
+            <table className='Datatable'>
                 <thead>
                     <tr>
                         <th>String</th>
@@ -102,9 +168,15 @@ function DisplayData({ shouldUpdate }) {
                             </td>
                             <td>
                                 {editingIndex === index ? (
-                                    <button onClick={() => handleSave(index)}>Save</button>
+                                    <>
+                                        <button onClick={() => handleSave(index)}>Save</button>
+                                        <button onClick={() => setEditingIndex(null)}>Cancel</button>
+                                    </>
                                 ) : (
-                                    <button onClick={() => handleEdit(index)}>Edit</button>
+                                    <>
+                                        <button onClick={() => handleEdit(index)}>Edit</button>
+                                        <button onClick={() => handleDelete(index)}>Delete</button>
+                                    </>
                                 )}
                             </td>
                         </tr>
