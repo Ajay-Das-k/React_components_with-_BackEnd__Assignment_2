@@ -127,7 +127,7 @@ class ResizableHandles extends React.PureComponent {
         </div>
 
         <div key="1" className="div_2">
-          <DisplayData key="displayData1" shouldUpdate={this.state.dataUpdated} />
+         <h1>msdskd</h1>
         </div>
         
         <div key="2" className="div-3">
