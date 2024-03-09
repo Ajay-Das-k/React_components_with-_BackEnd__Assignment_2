@@ -131,8 +131,8 @@ class ResizableHandles extends React.PureComponent {
         <TypingEffect text="Welcome to Responsive Grid Layout With Backend using React And Node Js" delay={100} />
         
         
-        <a href="" target="blank"><TypingEffect text="Link To Back End Code" delay={100} /></a>
-        <a href="" target="blank"><TypingEffect text="Link To FrontEnd Code" delay={100} /></a>
+        <a href="https://github.com/Ajay-Das-k/Node_jS_BackEnd_For_Todo_list_Assignment2" target="blank"><TypingEffect text="Link To Back End Code" delay={100} /></a>
+        <a href="https://github.com/Ajay-Das-k/React_components_with-_BackEnd__Assignment_2" target="blank"><TypingEffect text="Link To FrontEnd Code" delay={100} /></a>
 
 
         </div>
