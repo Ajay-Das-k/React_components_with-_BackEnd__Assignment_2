@@ -109,10 +109,13 @@ class ResizableHandles extends React.PureComponent {
 
   // Callback function to be passed to PostForm to update data
   handleDataUpdate = () => {
-    this.setState({ dataUpdated: true });
+    this.setState({ dataUpdated: [!this.state.dataUpdated] });
   };
 
+
+
   render() {
+  
     const { className, rowHeight } = this.props;
     return (
       <ReactGridLayout
