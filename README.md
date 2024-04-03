@@ -11,6 +11,7 @@ Collision Detection: Automatically prevents components from overlapping when dra
 Event Handling: Provides various event handlers for handling layout changes, resizing, and dragging.
 Overall, react-grid-layout simplifies the process of creating flexible and interactive grid-based layouts in React applications.
 
+![Netflix Clone](download.png)
 
 
 
